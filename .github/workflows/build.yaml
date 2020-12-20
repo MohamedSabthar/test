@@ -1,0 +1,16 @@
+name: PR build
+
+on: [push, pull_request]
+
+jobs:
+  ubuntu-build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Post release PR
+      env:
+        GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+      run: |
+        curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
+        bin/hub pull-request -m "[Automated] Sync master after "$VERSION" release"
