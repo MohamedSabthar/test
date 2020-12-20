@@ -16,4 +16,4 @@ jobs:
           git config user.name "MohamedSabthar"
           git config user.email "Sabtharugc0@gmail.com"
           curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
-          bin/hub pull-request -m "[Automated] Sync master after "$VERSION" release"
+          bin/hub GITHUB_USER=bmihaescu GITHUB_PASSWORD=${{secrets.PASS}} pull-request -m "[Automated] Sync master after "$VERSION" release"
