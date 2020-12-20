@@ -9,6 +9,7 @@ jobs:
 
     steps:
      - name: Post release PR
+       uses: actions/checkout@v2
        env:
         GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
        run: |
