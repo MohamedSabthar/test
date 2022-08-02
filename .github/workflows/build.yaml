@@ -10,10 +10,15 @@ jobs:
     steps:
      - uses: actions/checkout@v2
      - name: Post release PR
-       env:
-        GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
        run: |
-          git config user.name "MohamedSabthar"
-          git config user.email "Sabtharugc0@gmail.com"
-          curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
-          GITHUB_USER=MohamedSabthar GITHUB_TOKEN=${{ secrets.PASS }} bin/hub pull-request --base main -m "[Automated] Sync master after "$VERSION" release"
+          echo "BUILD_USING_DOCKER=-PbuildUsingDocker=nightly" >> $GITHUB_ENV
+          echo "GRADLE_SKIP_TASKS=-x :oracledb-compiler-plugin-tests:test"  >> $GITHUB_ENV
+          echo "GRADLE_SKIP_TASKS=$GRADLE_SKIP_TASKS -x :oracledb-examples:buildExamples"  >> $GITHUB_ENV
+          echo $GRADLE_SKIP_TASKS
+#        env:
+#         GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+#        run: |
+#           git config user.name "MohamedSabthar"
+#           git config user.email "Sabtharugc0@gmail.com"
+#           curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
+#           GITHUB_USER=MohamedSabthar GITHUB_TOKEN=${{ secrets.PASS }} bin/hub pull-request --base main -m "[Automated] Sync master after "$VERSION" release"
