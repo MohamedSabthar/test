@@ -16,7 +16,13 @@ jobs:
           echo "GRADLE_SKIP_TASKS=-x :oracledb-compiler-plugin-tests:test"  >> $GITHUB_ENV
           echo "$GRADLE_SKIP_TASKS"
           echo "GRADLE_SKIP_TASKS=$GRADLE_SKIP_TASKS -x :oracledb-examples:buildExamples"  >> $GITHUB_ENV
-          echo "$GRADLE_SKIP_TASKS"
+          
+          
+     - name: test
+       run: |
+         echo "$BUILD_USING_DOCKER"
+         echo "$GRADLE_SKIP_TASKS"
+        
 #        env:
 #         GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
 #        run: |
